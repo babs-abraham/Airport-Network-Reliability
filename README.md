@@ -59,7 +59,7 @@ Monthly files were extracted and consolidated in Power Query. A staging layer wa
 
 ## Data Model
 
-![Power BI Data Model](airline_model.png)
+![Power BI Data Model](images/airline_model.png)
 The model follows a star-schema approach with `Fact_flights` at the centre.
 
 - **Fact_flights** — flight-level operational measures and engineered analytical fields.

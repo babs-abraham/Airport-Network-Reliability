@@ -6,19 +6,19 @@
 
 ---
 
-## 1. Project Overview
+## Project Overview
 
 This project analyses airline operational reliability using monthly U.S. Bureau of Transportation Statistics (BTS) flight-performance data for 2024 and 2025. The objective was to transform fragmented monthly files into a structured Power BI model that answers operational and management questions around flight reliability, delays, cancellations, diversions, carriers, airports, and routes.
 
 The project demonstrates an end-to-end BI workflow: data acquisition, Power Query staging and transformation, data-quality troubleshooting, dimensional modelling, DAX development, validation, dashboard design, and business interpretation.
 
-## 2. Business Problem
+## Business Problem
 
 Airline reliability cannot be understood from a single KPI. Management needs to know where performance deteriorates, which carriers and routes create the greatest risk, whether delays originate at departure or persist through arrival, and how reliability changes over time.
 
 **Executive question:** How reliable is the airline network, and when/why does performance deteriorate?
 
-## 3. Business Questions
+## Business Questions
 
 - How many flights were operated?
 - What percentage arrived on time?
@@ -34,7 +34,7 @@ Airline reliability cannot be understood from a single KPI. Management needs to 
 - Which delays are carrier-controlled versus external?
 - Which operations deserve further investigation?
 
-## 4. Dataset & Scope
+## Dataset & Scope
 
 - **Source:** U.S. Bureau of Transportation Statistics (BTS) Reporting Carrier On-Time Performance data.
 - **Coverage:** monthly files from January 2024 through December 2025.
@@ -43,7 +43,7 @@ Airline reliability cannot be understood from a single KPI. Management needs to 
 - **Core entities:** flights, airlines, airports, cancellation codes, and dates.
 - **Analysis:** reliability, delays, cancellations, diversions, carriers, airports, routes, and time trends.
 
-## 5. Data Preparation & Power Query
+## Data Preparation & Power Query
 
 Monthly files were extracted and consolidated in Power Query. A staging layer was created before separating the data into fact and dimension tables. This provided a repeatable transformation workflow and made data-quality issues easier to investigate.
 
@@ -57,8 +57,9 @@ Monthly files were extracted and consolidated in Power Query. A staging layer wa
 - Validated relationships, calculations, and filter behaviour.
 - Troubleshot loading and refresh issues caused by the large dataset.
 
-## 6. Data Model
+## Data Model
 
+![Power BI Data Model](airline_model.png)
 The model follows a star-schema approach with `Fact_flights` at the centre.
 
 - **Fact_flights** — flight-level operational measures and engineered analytical fields.
@@ -68,7 +69,7 @@ The model follows a star-schema approach with `Fact_flights` at the centre.
 - **Date table** — year, month, quarter, and time intelligence.
 - **RouteKey** — origin/destination route analysis.
 
-## 7. Important DAX Measures
+## Important DAX Measures
 
 A dedicated measures table was created to keep business logic reusable and consistent. Key measures included:
 
@@ -116,10 +117,10 @@ Route Reliability Gap := [Route On-Time %] - [Network Benchmark]
 
 Additional model logic included `RouteEligible`, `High Risk Route`, `DelayCategory`, `OnTime Arrival Status`, `CarrierGapLabel`, `Top Route by Carrier`, and year-over-year flight/cancellation/diversion measures.
 
-## 8. Dashboard Structure
+## Dashboard Structure
 
 ### Page 1 — Network Reliability Overview
-
+![Overview](images/Overview.png)
 - Flight volume and network scale.
 - Overall on-time arrival performance.
 - Cancellation and diversion frequency.
@@ -130,7 +131,7 @@ Additional model logic included `RouteEligible`, `High Risk Route`, `DelayCatego
 - Dynamic page title that changes with the selected airline.
 
 ### Page 2 — Carrier & Route Performance
-
+![Reliability](images/Reliability.png)
 - Carrier-level on-time performance.
 - Route delay and reliability analysis.
 - Airport departure and arrival performance.
@@ -138,7 +139,7 @@ Additional model logic included `RouteEligible`, `High Risk Route`, `DelayCatego
 - Carrier-controlled versus external delay analysis.
 - High-risk operations requiring investigation.
 
-## 9. Analysis & Business Findings
+## Analysis & Business Findings
 
 The dashboard was designed to turn operational metrics into management insight. The main findings supported by the analysis framework are:
 
@@ -152,7 +153,7 @@ The dashboard was designed to turn operational metrics into management insight. 
 
 > **Note:** Carrier, airport, and route rankings should be interpreted using the project's eligibility and volume rules. The dashboard identifies patterns and areas for investigation; it does not by itself prove causation.
 
-## 10. Recommendations
+## Recommendations
 
 - Prioritise operational investigations using reliability gap, flight volume, and delay severity together.
 - Review consistently underperforming carriers and routes for recurring causes.
@@ -163,7 +164,7 @@ The dashboard was designed to turn operational metrics into management insight. 
 - Maintain a KPI dictionary with agreed definitions before using the dashboard for formal operational reporting.
 - Future versions could add targets, forecasting, automated refresh monitoring, and more detailed operational segmentation.
 
-## 11. Limitations & Assumptions
+## Limitations & Assumptions
 
 - The analysis depends on the definitions and fields supplied by BTS.
 - Monthly files required consolidation and standardisation before analysis.
@@ -172,7 +173,7 @@ The dashboard was designed to turn operational metrics into management insight. 
 - The analysis identifies patterns but does not establish causation.
 - Delay thresholds and categories are analytical definitions for this portfolio project and should be aligned with an organisation's KPI policy before operational use.
 
-## 12. Skills Demonstrated
+## Skills Demonstrated
 
 - **Power BI:** interactive dashboards, KPI design, filtering, and data storytelling.
 - **Power Query:** extraction, staging, transformation, append/merge, cleaning, and troubleshooting.
@@ -182,31 +183,24 @@ The dashboard was designed to turn operational metrics into management insight. 
 - **Business Analysis:** translating operational questions into metrics, findings, and recommendations.
 - **Problem Solving:** debugging transformation, loading, and refresh issues in a large-volume environment.
 
-## 13. Portfolio Outcome
+## Portfolio Outcome
 
 This project demonstrates the ability to take a large, fragmented operational dataset and turn it into a structured analytical product. It shows the complete BI workflow from source data and transformation through modelling, DAX, validation, visualisation, and business recommendations.
 
-## 14. Suggested Repository Structure
+## Repository Structure
 
 ```
 airline-operations-reliability/
 ├── README.md
 ├── PowerBI/
 │   └── Airline_Operations_Reliability.pbix
-├── Data/
-│   └── README.md
+├── README.md
 ├── Images/
-│   ├── overview-dashboard.png
-│   ├── reliability-dashboard.png
-│   ├── data-model.png
-│   ├── fact-table.png
-│   ├── dimension-airline.png
-│   ├── dimension-airport.png
-│   └── source-data.png
-└── Documentation/
-    └── Airline_Operations_Reliability_Project.docx
+   ├── overview.png
+   ├── reliability.png
+   ├── data-model.png
 ```
 
-## 15. Conclusion
+## Conclusion
 
 The Airline Operations & Reliability Analysis project demonstrates practical business intelligence capability using Power BI, Power Query, and DAX. It combines data preparation, modelling, analytical calculation, and business storytelling to identify where airline reliability is strongest, where it deteriorates, and which areas deserve further investigation.
